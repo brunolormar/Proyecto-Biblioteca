@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment: 
+      - "MARIADB_DB=${DB_NAME}"
+      - "MARIADB_USER=${DB_USERNAME}"
+      - "MARIADB_PASSWORD=${DB_PASSWORD}"
+    env_file:
+      - .env
+    ports:
+      - "${DB_PORT}:3306"
+    container_name: biblio
+    volumes:
+      - ./mariadb:/var/lib/mariadbsql/data
