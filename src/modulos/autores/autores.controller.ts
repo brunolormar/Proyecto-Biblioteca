@@ -18,18 +18,18 @@ export class AutoresController {
     return this.autoresService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.autoresService.findOne(id);
+  @Get(':codigo_de_autor')
+  findOne(@Param('codigo_de_autor') codigo_de_autor: string) {
+    return this.autoresService.findOne(codigo_de_autor);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAutoreDto: UpdateAutoreDto) {
-    return this.autoresService.update(id, updateAutoreDto);
+  @Patch(':codigo_de_autor')
+  update(@Param('codigo_de_autor') codigo_de_autor: string, @Body() updateAutoreDto: UpdateAutoreDto) {
+    return this.autoresService.update(codigo_de_autor, updateAutoreDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.autoresService.remove(id);
+  @Delete(':codigo_de_autor')
+  remove(@Param('codigo_de_autor') codigo_de_autor: string) {
+    return this.autoresService.remove(codigo_de_autor);
   }
 }

@@ -8,6 +8,8 @@ import { LibrosModule } from './modulos/libros/libros.module';
 import { PrestamosModule } from './modulos/prestamos/prestamos.module';
 import { SociosModule } from './modulos/socios/socios.module';
 import { SeedModule } from './modulos/seed/seed.module';
+import { AuthModule } from './modulos/auth/auth.module';
+import { UserModule } from './modulos/user/user.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { SeedModule } from './modulos/seed/seed.module';
     LibrosModule,
     PrestamosModule,
     SociosModule,
+    AuthModule,
+    UserModule,
 
   ],  
   controllers: [AppController],

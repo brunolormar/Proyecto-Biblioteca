@@ -9,6 +9,7 @@ import { Socio } from './entities/socio.entity';
   providers: [SociosService],
   imports: [
     TypeOrmModule.forFeature([Socio])
-  ]
+  ],
+  exports: [ SociosService, TypeOrmModule]
 })
 export class SociosModule {}

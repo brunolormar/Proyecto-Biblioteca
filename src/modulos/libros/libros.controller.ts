@@ -8,7 +8,10 @@ export class LibrosController {
   constructor(private readonly librosService: LibrosService) {}
 
   @Post()
+  //@UseGuards(JwtAuthGuard)
+  //@UseGuards(AuthGuard('jwt'))
   create(@Body() createLibroDto: CreateLibroDto) {
+    console.log('usuario creado')
     return this.librosService.create(createLibroDto);
   }
 

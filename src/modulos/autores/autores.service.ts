@@ -1,26 +1,93 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Patch, Post } from '@nestjs/common';
 import { CreateAutoreDto } from './dto/create-autore.dto';
 import { UpdateAutoreDto } from './dto/update-autore.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Autore } from './entities/autore.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AutoresService {
-  create(createAutoreDto: CreateAutoreDto) {
-    return 'This action adds a new autore';
+  constructor(
+    @InjectRepository(Autore)
+    private readonly autorRepository: Repository<Autore>
+  ) {}
+
+  @Post()
+  async create(createAutoreDto: CreateAutoreDto) {
+    try {
+      const autor = this.autorRepository.create(createAutoreDto);
+      await this.autorRepository.save(autor);
+      return{
+        msg: 'Registro Insertado',
+        data: autor,
+        status: 200
+      }
+    }catch(error){
+      console.log(error);
+      throw new InternalServerErrorException('Pongase en contacto con el Sysadmin')
+    }
   }
 
   findAll() {
-    return `This action returns all autores`;
+    const autor = this.autorRepository.find();
+    return autor;
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} autore`;
+  findOne(codigo_de_autor: string) {
+    const autor= this.autorRepository.findOne({
+      where:{
+        codigo_de_autor
+      }
+    });
+    return autor;
   }
 
-  update(id: string, updateAutoreDto: UpdateAutoreDto) {
-    return `This action updates a #${id} autore`;
+  @Patch()
+  async update(codigo_de_autor: string, updateAutoreDto: UpdateAutoreDto) {
+    try {
+      const autor = await this.autorRepository.findOne({
+        where:{
+          codigo_de_autor
+        }
+      });
+
+      // Update the libro entity with new values
+      Object.assign(autor, updateAutoreDto);
+
+      await this.autorRepository.save(autor);
+      return{
+        msg: 'Registro Actualizado',
+        data: autor,
+        status: 200
+      }
+    }catch(error){
+      console.log(error);
+      throw new InternalServerErrorException('Pongase en contacto con el Sysadmin')
+    } 
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} autore`;
+  async remove(id: string) {
+    try {
+      const result = await this.autorRepository.delete(id);
+      return{
+        msg: 'Registro borrado',
+        status: 200
+      }
+    }catch(error){
+      console.log(error);
+      throw new InternalServerErrorException('Pongase en contacto con el Sysadmin')
+    }
+  }
+
+  async deleteAllAutores(){
+    const query = this.autorRepository.createQueryBuilder('autor');
+    try{
+      return await query
+        .delete()
+        .where({})
+        .execute()
+    }catch(error){
+      throw new InternalServerErrorException('sysadmin ...')
+    }
   }
 }

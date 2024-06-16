@@ -1,9 +1,12 @@
 import { Libro } from "src/modulos/libros/entities/libro.entity";
-import { Column, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 
+@Entity({
+    name:'AUTORES'
+})
 export class Autore {
 
-    @PrimaryColumn('text', { unique: true})
+    @PrimaryColumn({ type: 'varchar', unique: true, length: 20})
     codigo_de_autor: string;
 
     @Column('text')
@@ -12,8 +15,7 @@ export class Autore {
     @OneToMany(
         () => Libro,
         (libro) => libro.autor,
+        { eager: true }
     )
     libros: Libro
-
-
 }

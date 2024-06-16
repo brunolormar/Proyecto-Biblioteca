@@ -1,7 +1,10 @@
 import { Autore } from "src/modulos/autores/entities/autore.entity";
 import { Prestamo } from "src/modulos/prestamos/entities/prestamo.entity";
-import { Column, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 
+@Entity({
+    name:'LIBROS'
+})
 export class Libro {
 
     @PrimaryColumn('numeric', { unique: true})
@@ -48,6 +51,7 @@ export class Libro {
     @OneToMany(
         () => Prestamo,
         (prestamo) => prestamo.libro,
+        { eager: true }
     )
     prestamosLibro: Prestamo
 }

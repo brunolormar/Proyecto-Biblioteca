@@ -9,6 +9,7 @@ export class SociosController {
 
   @Post()
   create(@Body() createSocioDto: CreateSocioDto) {
+    console.log('usuario creado')
     return this.sociosService.create(createSocioDto);
   }
 

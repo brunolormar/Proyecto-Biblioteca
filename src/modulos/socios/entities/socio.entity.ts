@@ -1,6 +1,9 @@
 import { Prestamo } from "src/modulos/prestamos/entities/prestamo.entity";
-import { Column, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
+@Entity({
+    name:'SOCIOS'
+})
 export class Socio {
 
     @PrimaryColumn('numeric', { unique: true})
@@ -24,6 +27,7 @@ export class Socio {
     @OneToMany(
         () => Prestamo,
         (prestamo) => prestamo.socio,
+        { eager: true }
     )
     prestamosSocio: Prestamo
 }

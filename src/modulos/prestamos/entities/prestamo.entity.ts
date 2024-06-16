@@ -1,16 +1,19 @@
 import { Libro } from "src/modulos/libros/entities/libro.entity";
 import { Socio } from "src/modulos/socios/entities/socio.entity";
-import { Column, JoinColumn, ManyToOne} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm";
 
+@Entity({
+    name:'PRESTAMOS'
+})
 export class Prestamo {
 
-    @Column({ name: 'id_libro'})
+    @PrimaryColumn({ name: 'id_libro'})
     libro_id: number;
 
-    @Column({ name: 'id_socio'})
+    @PrimaryColumn({ name: 'id_socio'})
     socio_id: number;
 
-    @Column('text')
+    @PrimaryColumn({ type: 'varchar', length: 20 })
     fecha_del_prestamo: string;
 
     @Column('text')
