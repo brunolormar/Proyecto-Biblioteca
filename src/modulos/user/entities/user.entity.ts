@@ -59,15 +59,15 @@ export class User {
     })
     instagram: string;*/
 
-    /*@CreateDateColumn({
+    @CreateDateColumn({
         name: 'create_at'
     })
-    createdAt: Date;*/
+    createdAt: Date;
 
-    /*@UpdateDateColumn({
+    @UpdateDateColumn({
         name: 'update_at'
     })
-    updatedAt: Date;*/
+    updatedAt: Date;
 
     //relación de 1 a 1 de Auth(User) <---> Cliente
     //Cliente: Cliente;

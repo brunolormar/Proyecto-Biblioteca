@@ -31,7 +31,7 @@ export class AuthService {
       return {
         msg: 'Usuario validando',
         status: 200,
-        user: usuario,
+        //user: usuario,
         token: this.getAccessToken(usuario)
       }
     }else{
